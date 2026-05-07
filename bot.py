@@ -1,4 +1,4 @@
-import telebot, random as rd, json as js, config as cfg, os
+import telebot, random as rd, json as js, config as cfg, os, requests, threading as th, time
 from telebot import types
 try:
 	with open("mess.json", "r") as f:
@@ -97,6 +97,12 @@ def photo(message):
 	with open("mess.json", "w") as f:
 		js.dump(messages, f)
 
+def ping():
+	while True:
+		requests.get("google.com")
+		time.sleep(180)
+
+th.Thread(target=(ping), daemon=True).start()
 while True:
 	try:
 		bot.polling()
