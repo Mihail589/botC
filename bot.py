@@ -100,7 +100,7 @@ def photo(message):
 def ping():
 	while True:
 		requests.get("google.com")
-		time.sleep(180)
+		time.sleep(300)
 
 th.Thread(target=(ping), daemon=True).start()
 while True:
