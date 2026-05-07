@@ -4,8 +4,7 @@ try:
 	with open("mess.json", "r") as f:
 		messages = js.load(f)
 except:
-	with open("2.jpg", "rb") as i:
-		messages = [{"text": "Привет", "image": None}, {"text": "Привет1", "image": i.read().hex()}, {"text": "Привет2", "image": None}]
+	messages = []
 	with open("mess.json", "w") as f:
 		js.dump(messages, f)
 
