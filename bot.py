@@ -3,6 +3,7 @@ from telebot import types
 try:
 	with open("mess.json", "r") as f:
 		messages = js.load(f)
+          
 except:
 	messages = []
 	with open("mess.json", "w") as f:
@@ -88,25 +89,16 @@ def add(message):
 
 def photo(message):
 	global messages
-	if message.content_type == "image":
+	print(message.content_type)
+	if message.content_type == "image" or message.content_type == "photo":
 		file_id = message.photo[-1].file_id
 		file_info = bot.get_file(file_id)
 		downloaded_file = bot.download_file(file_info.file_path)
 		messages[-1]["image"] = downloaded_file.hex()
+		print("OK")
 	bot.send_message(message.from_user.id, "Карта сохранена")
 	with open("mess.json", "w") as f:
 		js.dump(messages, f)
-
-def ping():
-	while True:
-		requests.get("google.com")
-		time.sleep(300)
-
-th.Thread(target=(ping), daemon=True).start()
-while True:
-	try:
-		bot.polling()
-	except KeyboardInterrupt as e:
-		exit()
-	except:
-		pass
+print("gu")
+bot.polling()
+	
